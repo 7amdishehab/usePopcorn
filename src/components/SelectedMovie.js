@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Loader from "./Loader";
 import StarRating from "./StarRating";
-import { cleanup } from "@testing-library/react";
 import { useKey } from "../hooks/useKey";
 
 const KEY = "f84fc31d";
@@ -66,8 +65,11 @@ function SelectedMovie({ selectedId, OnCloseMovie, OnAddWatched, watched }) {
 
   useEffect(
     function () {
-      document.title = `Movie | ${title}`;
-      if (!title) cleanup((document.title = `Movie`));
+      if (title) {
+        document.title = `Movie | ${title}`;
+      } else {
+        document.title = `Movie`;
+      }
       return function () {
         document.title = "usePopcorn";
       };
